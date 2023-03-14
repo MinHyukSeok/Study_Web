@@ -44,10 +44,31 @@
   - sourse venv/Scripts/activate
 - 가상환경 비활성화
   - deactivate
+- 가상환경 패키지 목록 저장
+  - pip freeze > requirements.txt
+- 파일로부터 패키지 설치
+  - pip install -r requirements.txt
+
+> 가상환경에 장고 만들기
+  1. 바탕화면에 폴더 만들기
+  2. 가상환경 설치
+  3. django 설치
+  4. 프로젝트 생성
+  5. 서버 생성
 
 # 프로젝트 구조
+- __init_.py
+  - Python 에게 이 디렉토리를 하나의 Python 패키지로 다루도록 지시
+  - 별도로 추가 코드를 작성하지 않음
+- settings.py
+  - Django 프로젝트 설정을 관리
+- urls.py
+  - 사이트와 url과 적절한 views의 연결을 지정
+- manage.py
+  - Django 프로젝트와 다양한 방법으로 상호작용하는 커맨드라인 유틸리티
 
-
+> 애플리케이션 생성
+  - $ python manage.py startapp articles
 
 # 애플리케이션 구조
 - admin.py
