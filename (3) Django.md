@@ -91,7 +91,19 @@
     2. `[settings.py](http://settings.py)` 내부에 방금 생성한 앱을 등록해야한다.
         1. `INSTALLED_APP` 리스트 내부에 어플리케이션 이름을 문자열형태로 등록해준다.
         2. 주의) `,` 빠지지 않도록 신경을 써주세요!!!
-
+10. 공용 `base.html` 을 만든다.
+    1. 위치는 프로젝트 폴더 내부에 `templates` 폴더를 만든다. (manage.py 와 같은 위치)
+    2. 그 내부에 `base.html` 을 생성하고 기본 html 구조를 만든다. (+ 부트스트랩)
+    3. `block` tag 를 body에 넣어서 상속가능하게 만들어 준다. ⇒ `!bb` snippet 등록완료!
+    4. `settings.py` 에 TEMPLATES 의 DIRS 에 `BASE_DIR / 'templates'` 를 등록하면 끝!
+    
+11. url 분리를 진행한다.
+    1. 어플리케이션 폴더 내부에 `urls.py` 파일을 새롭게 생성한다.
+    2. urls.py 내부에 snippet 을 통해 자동완성 한다. (urlspy)
+    3. app_name 에는 어플리케이션 명을 작성한다.
+    4. 프로젝트 폴더(settings.py가 위치한) 에 있는 [urls.py](http://urls.py) 에서 방금 작성한 어플리케이션 내부 urls.py 를 등록한다.
+        1. include 를 import 한다. (상단 주석 참고)
+        2. path 에다가 어플리케이션 urls.py 를 include 하면 끝!  (상단 주석 참고)
 
 # 구조
 
@@ -220,7 +232,23 @@ INSTALLED_APPS = [
   - 공백이나 구두점 문자 또한 사용할 수 없음
 - dot(.)를 사용하여 변수 속성에 접근할 수 있음
 - render()의 세번째 인자로{key:value} 와 같이 딕셔너리 형태로 넘겨주며, 여기서 정의한 key에 해당하는 문자열이 Template에서 사용 가능한 변수명이 됨
+#### variable routing
+- 변수는 <>에 정의하며 view 함수의 인자로 할당됨
+- 기본 타입은 string이며 5가지 타입으로 명시할 수 있음
+- str
+  - / 를 제외하고 비어 있지 않은 모든 문자열
+  - 작성하지 않을 경우 기본 값
+- int
+  - 0 또는 양의 정수와 매치
 
+
+```python
+
+urlpattrens = [
+  path('hello/<str:name>/', views.hello)
+] 
+
+```
 
 ### Filter
 - 표시할 변수를 수정할 때 사용
@@ -267,11 +295,11 @@ INSTALLED_APPS = [
 - 공통된 양식이 있는 경우 body.html을 프로젝트 폴더에 탬플릿 폴더 만들자 
 - 그리고 각각의 앱에서 프로젝트 폴더에 있는 바디를 참조
   > 템플릿 상속
-  1. 프로젝트의 setting에 있는 TEMPLATES 접근
-  2. DIRS : [BASE_DIR / 'templates']
-    - BASE_DIR : 최상위 폴더
-    - 최상위 폴더의 templates라는 폴더를 참조하겠다라는 뜻
-    - 해당 프로젝트의 모든 앱에서 블록 사용 가능
+  - 공용 `base.html` 을 만든다.
+    1. 위치는 프로젝트 폴더 내부에 `templates` 폴더를 만든다. (manage.py 와 같은 위치)
+    2. 그 내부에 `base.html` 을 생성하고 기본 html 구조를 만든다. (+ 부트스트랩)
+    3. `block` tag 를 body에 넣어서 상속가능하게 만들어 준다. ⇒ `!bb` snippet 등록완료!
+    4. `settings.py` 에 TEMPLATES 의 DIRS 에 `BASE_DIR / 'templates'` 를 등록하면 끝!
   
 - 앱이 많을때  각 app에 urls를 관리하자
 - why ? 프로젝트 urls에서 다 관리하면 가독성이 떨어지고 프로그램 유지보수에 좋지 않음
